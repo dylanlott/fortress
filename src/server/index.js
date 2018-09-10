@@ -39,6 +39,7 @@ app.use(nuxt.render)
 
 // setup the database connection
 mongoose.Promise = global.Promise
+console.log(`connecting to ${process.env.DB_URL}`)
 mongoose.connect(process.env.DB_URL, { useMongoClient: true })
 
 app.listen(process.env.PORT, process.env.HOST, err => {
