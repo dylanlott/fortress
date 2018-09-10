@@ -21,7 +21,11 @@ const cardSchema = new mongoose.Schema({
   },
   tags: [{
     type: String
-  }]
+  }],
+  public: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: true
 })

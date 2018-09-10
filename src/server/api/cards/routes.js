@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import authenticate from '~/middleware/authenticate'
-import { index } from './controllers'
+import { index, id } from './controllers'
 
 const router = Router()
 
@@ -11,6 +11,8 @@ router.route('/')
 
 router.route('/:username')
   .all(authenticate())
-  .get(index.getOne)
+  .get(id.getOne)
+  .put(id.update)
+  .delete(id.delete)
 
 export default router

@@ -10,7 +10,8 @@
         <v-container align="center">
           <div v-for="card in $store.state.lists.cards">
             <v-card class="ma-2 grey lighten-4 elevation-3">
-              <v-card-title><h2>{{ card.title }}</h2></v-card-title>
+              <v-card-title v-if="card.title"><h2>{{ card.title }}</h2></v-card-title>
+              <!-- TODO: Add markdown formatting to body -->
               <v-card-text>{{ card.body }}</v-card-text>
             </v-card>
           </div>
@@ -21,9 +22,12 @@
       <v-card>
         <v-card-title><h2>Create a card</h2></v-card-title>
         <v-card-text>
-          <v-form>
-            <v-text-field name="title" label="title" outline v-model="card.title"></v-text-field>
-            <v-text-field name="body" label="body" outline v-model="card.body"></v-text-field>
+          <v-form @keyup.enter="submit(card)">
+            <!-- TODO: Better submit enter button handling --> 
+            <v-text-field name="title" @keyup.enter="submit(card)" label="title" outline v-model="card.title"></v-text-field>
+            <v-text-field name="body" @keyup.enter="submit(card)" label="body" outline v-model="card.body"></v-text-field>
+            <!-- TODO: add label support --> 
+            <!-- TODO: add archiving buttong -->
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -61,12 +65,12 @@ export default {
     },
     submit (card) {
       const self = this
-      this.$state.lists.cards.push(card)
       this.$store.dispatch('cards/create', card)
         .then(() => {
           if (this.$store.state.notification.success) {
             self.card = {title: "", body: "", tags: []} 
             this.$store.dispatch('fetchAllCards')
+            self.create = false
           } 
         })
     }, 
