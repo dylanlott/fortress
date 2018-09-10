@@ -17,8 +17,11 @@
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>
-              {{name}}
-              </v-list-tile-title>
+              {{ user.username }}
+            </v-list-tile-title>
+            <v-list-tile-title>
+              {{ user.email }}
+            </v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action icon>
             <v-btn icon light @click.stop="mini = !mini">
@@ -112,31 +115,28 @@ export default {
       drawer: null,
       items: [
         {
-          action: 'android',
-          title: 'Something',
-          items: [
-            { title: 'First' },
-            { title: 'Second' },
-            { title: 'Third' }
-          ]
+          action: 'dashboard',
+          title: 'Cards',
+          to: '/cards'
         },
         {
           action: 'settings',
-          title: 'Settings',
-          items: [
-            { title: 'Payment' },
-            { title: 'Account' },
-            { title: 'Privacy' }
-          ]
+          title: 'Settings & Profile',
+          to: '/users/profile'
         }
       ],
       name: 'overlord',
-      mini: true,
+      mini: false,
       dark: true,
       right: null
     }
   },
   computed: {
+    user: {
+      get () {
+        return this.$store.state.user
+      }
+    },
     snackbar: {
       get () {
         return this.$store.state.notification.snackbar
