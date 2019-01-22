@@ -1,14 +1,5 @@
 version: '3'
 services:
-  web:
-    build:
-      dockerfile: ./Dockerfile
-      context: ./
-    ports:
-      - "3000:3000"
-    networks:
-      - app-tier
-
   db:
     image: bitnami/mongodb
     ports:
@@ -18,7 +9,6 @@ services:
     networks:
       - app-tier
 
-       
 networks:
   app-tier:
     driver: bridge
