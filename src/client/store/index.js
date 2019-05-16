@@ -6,7 +6,9 @@ export const state = () => {
     lists: {
       users: [],
       cards: [],
-    }
+    },
+    loading: false,
+    success: false
   }
 }
 export const mutations = {
@@ -21,15 +23,21 @@ export const mutations = {
   SET_USERS (state, payload) {
     state.lists.users = payload.users
   },
+  FETCH_CARDS_REQUEST (state) {
+    state.loading = true
+    state.success = false
+  },
   FETCH_CARDS_SUCCESS (state, payload) {
+    state.loading = false
+    state.success = true
     state.lists.cards = payload
   },
   FETCH_ALL_USERS_REQUEST () {
-    console.log('Fetching all users...')
+    state.loading = true
   },
   FETCH_ALL_USERS_SUCCESS (state, users) {
     state.lists.users = users
-    console.log('Fetch all users success!')
+    state.loading = false
   },
   FETCH_ALL_USERS_FAILURE (state, error) {
     console.error(error.response.data)
@@ -60,12 +68,13 @@ export const actions = {
     }
   },
   async fetchAllCards({ commit }) {
-      try {
-        let { data } = await axios.get('/cards')
-        console.log(data)
-        commit('FETCH_CARDS_SUCCESS', data)
-      } catch (err) {
-        console.error('Error fetching cards: ', err)
-      }
+    commit('FETCH_CARDS_REQUEST')
+    try {
+      let { data } = await axios.get('/cards')
+      console.log(data)
+      commit('FETCH_CARDS_SUCCESS', data)
+    } catch (err) {
+      console.error('Error fetching cards: ', err)
+    }
   }
 }

@@ -14,7 +14,7 @@ module.exports = {
   cache: true,
   css: [
     { src: 'vuetify/dist/vuetify.min.css', lang: 'css' },
-    { src: '~/assets/style/app.styl', lang: 'styl' }
+    { src: '~/assets/style/app.styl', lang: 'styl' },
   ],
   env: {
     HOST: process.env.HOST,
@@ -40,7 +40,9 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/component-cache'
   ],
-  plugins: ['~/plugins/vuetify.js'],
+  plugins: [
+    '~/plugins/vuetify.js',
+  ],
   render: {
     static: {
       maxAge: '1y',
