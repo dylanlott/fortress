@@ -12,7 +12,7 @@
       <v-list class="main-list">
         <v-list-tile avatar tag="div">
           <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" />
+              <v-icon>user</v-icon>
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>

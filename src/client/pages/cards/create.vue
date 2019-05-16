@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-flex>
-            <h1>New Note</h1>
+            <h1>New Card</h1>
             <v-form ref="card-form">
                 <v-text-field
                   v-model="title"
@@ -20,7 +20,6 @@
                   label="Text"
                   outline
                 ></v-textarea>
-
                 <v-btn @click="submit()" color="primary">
                   Submit
                 </v-btn>
